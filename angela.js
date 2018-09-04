@@ -1,28 +1,35 @@
-const Discord = require("discord.js");
-const mongoose = require("mongoose");
-const client = new Discord.Client();
-const config = require("./config.json");
+const Discord       = require("discord.js");
+const { promisify } = require("util");
+const readdir       = promisify(require("fs").readdir);
+const client        = new Discord.Client();
+client.config       = require("./config.json");
 
-client.on("ready", () => {
-  //console.log("Init connection...");
-  //mongoose.Promise = global.Promise;
-  //global.db = global.db ? global.db: mongoose.connect(config.mongodbHost, {useMongoClient: true});
-  console.log("I am ready!");
-});
+require("./modules/functions.js")(client);
 
-client.on("message", (message) => {
-  if (!message.content.startsWith(config.prefix) || message.author.bot) return;
-  if (message.content.indexOf(config.prefix) !== 0) return;
+// Todo: use Discord.Collection
+client.commands = [];
+client.aliases = [];
 
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
+const init = async () => {
+    const cmdFiles = await readdir("./commands/");
 
-  try {
-    let commandFile = require(`./commands/${command}.js`);
-    commandFile.run(client, message, args);
-  } catch (err) {
-    message.channel.send(":warning: La commande `" + config.prefix + command + "` n'existe pas.");
-  }
-});
+    cmdFiles.forEach(file => {
+        if (!file.endsWith(".js")) return;
 
-client.login(config.token);
+        const response = client.loadCommand(file);
+
+        if (response) console.log(response);
+    });
+
+    const evtFiles = await readdir("./events/");
+    evtFiles.forEach(file => {
+        const eventName = file.split(".")[0];
+        const event = new (require(`./events/${file}`))(client);
+
+        client.on(eventName, (...args) => event.run(...args));
+    });
+
+    client.login(client.config.token);
+};
+
+init();
