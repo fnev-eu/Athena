@@ -38,12 +38,12 @@ module.exports = class {
 
     // Now, it may seem weird that we use this in the messageReactionRemove event, but we still need to check if there's an image so that we can set it, if necessary.
     extension(reaction, attachment) {
-      const imageLink = attachment.split('.');
-      const typeOfImage = imageLink[imageLink.length - 1];
-      const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
+        const imageLink = attachment.split('.');
+        const typeOfImage = imageLink[imageLink.length - 1];
+        const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
 
-      if (!image) return '';
+        if (!image) return '';
 
-      return attachment;
+        return attachment;
     };
-  };
+};

@@ -8,7 +8,10 @@ module.exports = class {
     async run(reaction, user) {
         const message = reaction.message;
 
-        if (reaction.emoji.name !== '⭐') return;
+        if (reaction.emoji.name === '⭐') return startboard(reaction, user);
+    }
+
+    starboard(reaction, user) {
         if (message.author.id === user.id) return message.channel.send(`${user}, tu ne peux pas "star" tes propres messages.`);
         //if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
 
@@ -50,12 +53,12 @@ module.exports = class {
 
     // Here we add the this.extension function to check if there's anything attached to the message.
     extension(reaction, attachment) {
-      const imageLink = attachment.split('.');
-      const typeOfImage = imageLink[imageLink.length - 1];
-      const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
+        const imageLink = attachment.split('.');
+        const typeOfImage = imageLink[imageLink.length - 1];
+        const image = /(jpg|jpeg|png|gif)/gi.test(typeOfImage);
 
-      if (!image) return '';
+        if (!image) return '';
 
-      return attachment;
+        return attachment;
     }
 };
