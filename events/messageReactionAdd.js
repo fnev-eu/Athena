@@ -1,17 +1,38 @@
 const { RichEmbed } = require("discord.js");
+const availableRoles = [
+    'Bleu',
+    'Gris',
+    'Jaune',
+    'Orange',
+    'Rose',
+    'Vert',
+    'Violet',
+];
 
 module.exports = class {
     constructor(client) {
-      this.client = client;
+        this.client = client;
     }
 
     async run(reaction, user) {
-        const message = reaction.message;
+        const message    = reaction.message;
+        let emojiName    = reaction.emoji.name;
+        let formatedName = emojiName.charAt(0).toUpperCase() + emojiName.slice(1).toLowerCase();
 
-        if (reaction.emoji.name === '⭐') return startboard(reaction, user);
-    }
+        if (message.id === '519289526787506208') {
+            if (availableRoles.indexOf(formatedName) >= 0) {
+                let role   = message.guild.roles.find(role => role.name === formatedName);
+                let member = message.guild.members.get(user.id);
 
-    starboard(reaction, user) {
+                if (!member.roles.has(role.id)) {
+                    member.addRole(role);
+                }
+            }
+
+            return;
+        }
+
+        if (emojiName !== '⭐') return;
         if (message.author.id === user.id) return message.channel.send(`${user}, tu ne peux pas "star" tes propres messages.`);
         //if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
 

@@ -1,4 +1,13 @@
 const { RichEmbed } = require("discord.js");
+const availableRoles = [
+    'Bleu',
+    'Gris',
+    'Jaune',
+    'Orange',
+    'Rose',
+    'Vert',
+    'Violet',
+];
 
 module.exports = class {
     constructor(client) {
@@ -8,8 +17,24 @@ module.exports = class {
     async run(reaction, user) {
         const message = reaction.message;
 
+        let emojiName    = reaction.emoji.name;
+        let formatedName = emojiName.charAt(0).toUpperCase() + emojiName.slice(1).toLowerCase();
+
+        if (message.id === '519289526787506208') {
+            if (availableRoles.indexOf(formatedName) >= 0) {
+                let role   = message.guild.roles.find(role => role.name === formatedName);
+                let member = message.guild.members.get(user.id);
+
+                if (member.roles.has(role.id)) {
+                    member.removeRole(role);
+                }
+            }
+
+            return;
+        }
+
         if (message.author.id === user.id) return;
-        if (reaction.emoji.name !== '⭐') return;
+        if (emojiName !== '⭐') return;
 
         const starChannel = this.client.channels.get(this.client.config.starboardChannelId);
 
