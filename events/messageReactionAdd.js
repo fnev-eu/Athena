@@ -24,17 +24,15 @@ module.exports = class {
                 let role   = message.guild.roles.find(role => role.name === formatedName);
                 let member = message.guild.members.get(user.id);
 
-                if (!member.roles.has(role.id)) {
-                    member.addRole(role);
-                }
+                if (!member.roles.has(role.id)) member.addRole(role);
             }
 
             return;
         }
 
         if (emojiName !== '⭐') return;
-        if (message.author.id === user.id) return message.channel.send(`${user}, tu ne peux pas "star" tes propres messages.`);
-        //if (message.author.bot) return message.channel.send(`${user}, you cannot star bot messages.`);
+        if (message.author.id === user.id) return message.channel.send(`${user}, tu ne peux pas "star" tes propres messages !`);
+        if (message.author.bot) return message.channel.send(`${user}, tu ne peux pas "star" les messages des bots.`);
 
         const starChannel = this.client.channels.get(this.client.config.starboardChannelId);
 

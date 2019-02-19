@@ -25,9 +25,7 @@ module.exports = class {
                 let role   = message.guild.roles.find(role => role.name === formatedName);
                 let member = message.guild.members.get(user.id);
 
-                if (member.roles.has(role.id)) {
-                    member.removeRole(role);
-                }
+                if (member.roles.has(role.id)) member.removeRole(role);
             }
 
             return;
