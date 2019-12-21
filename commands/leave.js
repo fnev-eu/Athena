@@ -7,12 +7,14 @@ exports.run = (client, message, args) => {
 
     let role = message.guild.roles.find(role => role.name === askedRole);
 
-    if (!member.roles.has(role.id)) {
-        member.addRole(role)
-        message.channel.send("Accès autorisé " + member + ", vous faites maintenant parti du groupe `" + askedRole + "`.");
+    if (member.roles.has(role.id)) {
+        member.removeRole(role);
+        message.channel.send("Accès révoqué " + member + ", vous ne faites plus parti du groupe `" + askedRole + "`.");
     } else {
-        message.channel.send("Vous faites déjà parti du groupe `" + askedRole + "` " + member + ".");
+        message.channel.send("Vous ne faites pas parti du groupe `" + askedRole + "` " + member + ".");
     }
+
+    return;
 };
 
 exports.conf = {
@@ -22,8 +24,8 @@ exports.conf = {
 };
 
 exports.help = {
-    name: "join",
+    name: "leave",
     category: "Miscelaneous",
-    description: "Ajoute le rôle demandé s'il existe.",
+    description: "Retire le rôle demandé s'il existe.",
     usage: "roles"
 };
