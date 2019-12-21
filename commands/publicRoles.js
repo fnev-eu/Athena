@@ -2,11 +2,11 @@ exports.run = (client, message, args) => {
     message.channel.send(
         "Vous pouvez utiliser les commandes `" + client.config.prefix + "join` et `" + client.config.prefix + "remove` sur les groupes suivants :"
         + "\n\n"
-        + "- `overwatch`\n"
-        + "- `minecraft`\n"
-        + "- `seaofthieves`\n"
-        + "- `elite`\n\n"
-        + "- `notifs`"
+        + "- `Overwatch`\n"
+        + "- `Minecraft`\n"
+        + "- `SeaOfThieves`\n"
+        + "- `Elite`\n\n"
+        + "- `Notifications`"
     );
 };
 
