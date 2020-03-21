@@ -3,6 +3,7 @@ exports.run = (client, message, args) => {
         "Vous pouvez utiliser les commandes `" + client.config.prefix + "join` et `" + client.config.prefix + "remove` sur les groupes suivants :"
         + "\n\n"
         + "- `Overwatch`\n"
+        + "- `AnimalCrossing`\n"
         + "- `Minecraft`\n"
         + "- `SeaOfThieves`\n"
         + "- `Elite`\n\n"

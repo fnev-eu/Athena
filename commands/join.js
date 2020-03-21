@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {
     let member         = message.guild.members.get(message.author.id);
-    let availableRoles = ['Overwatch', 'Minecraft', 'SeaOfThieves', 'Elite', 'Notifications'];
+    let availableRoles = ['Overwatch', 'AnimalCrossing', 'Minecraft', 'SeaOfThieves', 'Elite', 'Notifications'];
     let askedRole      = args.shift();
 
     if (!availableRoles.includes(askedRole)) return;
