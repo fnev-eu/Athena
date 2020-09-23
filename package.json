@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/fnev-eu/Angela-Ziegler#readme",
   "dependencies": {
-    "discord.js": "12.2.0",
+    "discord.js": "11.6.4",
     "fs": "0.0.2",
     "mongoose": "5.9.26"
   }
