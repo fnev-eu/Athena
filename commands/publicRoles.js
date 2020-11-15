@@ -5,9 +5,7 @@ exports.run = (client, message, args) => {
         + "- `Overwatch`\n"
         + "- `AnimalCrossing`\n"
         + "- `Minecraft`\n"
-        + "- `SeaOfThieves`\n"
-        + "- `Elite`\n\n"
-        + "- `Notifications`"
+        + "- `Diablo`"
     );
 };
 
