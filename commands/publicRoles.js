@@ -6,9 +6,11 @@ exports.run = (client, message, args) => {
         + "- `Civilization`\n"
         + "- `Diablo`\n"
         + "- `Dofus`\n"
+        + "- `GuildWars`\n"
         + "- `Minecraft`\n"
         + "- `Overwatch`\n"
-        + "- `PokemonGo`"
+        + "- `PokemonGo`\n"
+        + "- `SeaOfThieves`"
     );
 };
 
